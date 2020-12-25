@@ -1,49 +1,45 @@
 package com.bms.project.models;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+@Entity
 public class Post {
-
-	private int postId;
-	private String postTitle;
-	private String postContent;
-	private String postDate;;
-
-	public Post(int postId, String postTitle, String postContent, String postDate) {
-		this.postId = postId;
-		this.postTitle = postTitle;
-		this.postContent = postTitle;
-		this.postDate = postDate;
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String title;
+	private String content;
+	private String date;
+	private boolean isPublic;
+	public Long getId() {
+		return id;
 	}
-
-	public int getPostId() {
-		return postId;
+	public void setId(Long id) {
+		this.id = id;
 	}
-
-	public void setPostId(int postId) {
-		this.postId = postId;
+	public String getTitle() {
+		return title;
 	}
-
-	public String getPostTitle() {
-		return postTitle;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-
-	public void setPostTitle(String postTitle) {
-		this.postTitle = postTitle;
+	public String getContent() {
+		return content;
 	}
-
-	public String getPostContent() {
-		return postContent;
+	public void setContent(String content) {
+		this.content = content;
 	}
-
-	public void setPostContent(String postContent) {
-		this.postContent = postContent;
+	public String getDate() {
+		return date;
 	}
-
-	public String getPostDate() {
-		return postDate;
+	public void setDate(String date) {
+		this.date = date;
 	}
-
-	public void setPostDate(String postDate) {
-		this.postDate = postDate;
+	public boolean isPublic() {
+		return isPublic;
+	}
+	public void setPublic(boolean isPublic) {
+		this.isPublic = isPublic;
 	}
 }
