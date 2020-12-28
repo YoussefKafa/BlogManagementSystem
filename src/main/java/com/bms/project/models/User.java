@@ -1,96 +1,61 @@
 package com.bms.project.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+@Entity
+@Table(name="user",uniqueConstraints=@UniqueConstraint(columnNames={"email"}))
 public class User {
-	private int userId;
-	private String userName;
-	private String userEmail;
-	private String userPassword;
-	private int userAge;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+	private String name;
+	private String email;
+	private String password;
+	private int age;
 
-	// Reference To Post Class
-	Post postobj;
-
-	public User() {
-		
-	}
-	
-	public User(int userId, String userName, String userEmail, String userPassword, int userAge) {
-		this.userId = userId;
-		this.userName = userName;
-		this.userEmail = userEmail;
-		this.userPassword = userPassword;
-		this.userAge = userAge;
+	public long getId() {
+		return id;
 	}
 
-	public int getUserId() {
-		return userId;
+	public void setId(long id) {
+		this.id = id;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public String getName() {
+		return name;
 	}
 
-	public String getUserName() {
-		return userName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public String getEmail() {
+		return email;
 	}
 
-	public String getUserEmail() {
-		return userEmail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
+	public String getPassword() {
+		return password;
 	}
 
-	public String getUserPassword() {
-		return userPassword;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
+	public int getAge() {
+		return age;
 	}
 
-	public int getUserAge() {
-		return userAge;
-	}
-
-	public void setUserAge(int userAge) {
-		this.userAge = userAge;
-	}
-
-	// Publish post Method
-	
-	   /**
-	   * This method is used to publish new post.
-	   */
-
-	public void publishPost() {
-		// To Do
-	}
-
-	// Edit post Method
-	   /**
-	   * This method is used to edit specific post.
-	   * @param postId  This is the parameter to specific the post.
-	   */
-
-	public void editPost(int postId) {
-		// To Do
-	}
-
-	// Delete post Method
-	
-	  /**
-	   * This method is used to delete specific post.
-	   * @param postId  This is the parameter to specific the post.
-	   */
-
-	public void deletePost(int postId) {
-		// To Do
+	public void setAge(int age) {
+		this.age = age;
 	}
 
 }
