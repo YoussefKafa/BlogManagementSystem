@@ -9,4 +9,7 @@ public class PostServices {
 	public long count() {
 		return postRepo.count();
 	}
+	public void deleteById(Long id) {
+		postRepo.deleteById(id);
+	}
 }
