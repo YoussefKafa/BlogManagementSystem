@@ -3,6 +3,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Post {
 	@Id
@@ -12,6 +15,11 @@ public class Post {
 	private String content;
 	private String date;
 	private boolean isPublic;
+	
+	@ManyToOne
+	@JsonIgnore
+	private User user;
+	
 	public Long getId() {
 		return id;
 	}

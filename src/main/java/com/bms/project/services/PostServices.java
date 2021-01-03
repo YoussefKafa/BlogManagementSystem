@@ -10,9 +10,11 @@ import java.util.Optional;
 public class PostServices {
 	@Autowired
 	public PostRepo postRepo;
-public Post saveOrUpdate(final Post post) {
-	return postRepo.save(post);
-}
+
+	public Post saveOrUpdate(final Post post) {
+		return postRepo.save(post);
+	}
+
 	public long count() {
 		return postRepo.count();
 	}
@@ -32,6 +34,5 @@ public Post saveOrUpdate(final Post post) {
 	public Iterable<Post> findAll() {
 		return postRepo.findAll();
 	}
-
 
 }
