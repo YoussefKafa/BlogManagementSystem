@@ -19,6 +19,12 @@ public class PostController {
 	@Autowired
 	public PostServices postServices;
 
+	@GetMapping("/api/post/count")
+	public ResponseEntity<?> count() {
+		long result = postServices.count();
+		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
+
 	@PostMapping("/api/post/save")
 	public ResponseEntity<?> save(@Valid @RequestBody Post post) {
 		postServices.saveOrUpdate(post);
@@ -31,23 +37,21 @@ public class PostController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
-	@GetMapping("/api/post/count")
-	public long count() {
-		return postServices.count();
-	}
-
 	@DeleteMapping("/api/post/deleteAll")
-	public void deleteAll() {
+	public ResponseEntity<Void> deleteAll() {
 		postServices.deleteAll();
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 	@GetMapping("/api/post/findById/{id}")
-	public Optional<Post> findById(@PathVariable Long id) {
-		return postServices.findById(id);
+	public ResponseEntity<Optional<Post>> findById(@PathVariable Long id) {
+		Optional<Post> result = postServices.findById(id);
+		return new ResponseEntity<Optional<Post>>(result, HttpStatus.OK);
 	}
 
 	@GetMapping("/api/post/findAll")
-	public Iterable<Post> findAll() {
-		return postServices.findAll();
+	public ResponseEntity<Iterable<Post>> findAll() {
+		Iterable<Post> result = postServices.findAll();
+		return new ResponseEntity<Iterable<Post>>(result, HttpStatus.OK);
 	}
 }
