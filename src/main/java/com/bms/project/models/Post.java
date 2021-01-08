@@ -35,8 +35,8 @@ public class Post {
 
 	private boolean isPublic;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id")
 	@JsonIgnore
 	private User user;
 

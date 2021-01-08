@@ -8,5 +8,4 @@ import com.bms.project.models.User;
 @Repository
 public interface UserRepo extends CrudRepository<User, Long> {
 
-	
 }
