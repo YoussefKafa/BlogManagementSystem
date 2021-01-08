@@ -19,6 +19,10 @@ public class UserServices {
 		return userRepo.count();
 	}
 
+	public User save(User user) {
+		return userRepo.save(user);
+	}
+
 	public void deleteById(long id) {
 		userRepo.deleteById(id);
 	}

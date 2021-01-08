@@ -13,7 +13,6 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -42,7 +41,7 @@ public class User {
 	@Digits(fraction = 0, integer = 2, message = "Age must be between 10 and 100 years")
 	private int age;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", cascade = { CascadeType.ALL })
 	private List<Post> posts = new ArrayList<>();
 
 	public long getId() {

@@ -1,10 +1,12 @@
 package com.bms.project.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -24,16 +26,17 @@ public class Post {
 	private String title;
 
 	@NotNull(message = "Content is required")
-	@Size(min = 30, max = 500, message = "Content must be between 30 and 500 letters")
+	@Size(min = 3, max = 500, message = "Content must be between 30 and 500 letters")
 	private String content;
 
 	@NotNull(message = "Date is required")
-	@DateTimeFormat(pattern = "dd.MM.yy")
+//	@DateTimeFormat(pattern = "dd.MM.yy")
 	private String date;
 
 	private boolean isPublic;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
 	@JsonIgnore
 	private User user;
 
