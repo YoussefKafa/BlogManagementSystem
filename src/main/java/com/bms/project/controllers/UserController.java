@@ -1,9 +1,7 @@
 package com.bms.project.controllers;
 
 import java.util.Optional;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.bms.project.models.Post;
 import com.bms.project.models.User;
 import com.bms.project.services.PostServices;
 import com.bms.project.services.UserServices;
@@ -60,15 +56,6 @@ public class UserController {
 	public ResponseEntity<Iterable<User>> findAll() {
 		Iterable<User> result = userServices.findAll();
 		return new ResponseEntity<Iterable<User>>(result, HttpStatus.OK);
-	}
-
-	@PostMapping("/api/user/createPost/{userId}")
-	public ResponseEntity<Optional<Post>> createPost (@Valid Post post, @PathVariable Long userId) {
-		Optional<Post> result = userServices.findById(userId).map(user -> {
-			post.setUser(user);
-			return postServices.saveOrUpdate(post);
-		});
-		return new ResponseEntity<Optional<Post>>(result, HttpStatus.OK);
 	}
 
 }

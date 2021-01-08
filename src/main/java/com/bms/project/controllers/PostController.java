@@ -1,6 +1,8 @@
 package com.bms.project.controllers;
 
 import java.util.Optional;
+
+import javax.management.relation.RelationNotFoundException;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.bms.project.dao.UserRepo;
 import com.bms.project.models.Post;
 import com.bms.project.services.PostServices;
 
@@ -18,6 +22,8 @@ import com.bms.project.services.PostServices;
 public class PostController {
 	@Autowired
 	public PostServices postServices;
+	@Autowired
+	public UserRepo userRepo;
 
 	@GetMapping("/api/post/count")
 	public ResponseEntity<?> count() {
@@ -25,10 +31,14 @@ public class PostController {
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 
-	@PostMapping("/api/post/save")
-	public ResponseEntity<?> save(@Valid @RequestBody Post post) {
-		postServices.saveOrUpdate(post);
-		return new ResponseEntity<Post>(post, HttpStatus.CREATED);
+	@PostMapping("/api/post/save/{userId}")
+	public ResponseEntity<?> save(@Valid @RequestBody Post post,@PathVariable Long userId) throws RelationNotFoundException {
+		 return userRepo.findById(userId).map(user -> {
+	            post.setUser(user);
+	        	postServices.saveOrUpdate(post);
+	    		return new ResponseEntity<Post>(post, HttpStatus.CREATED);
+	        }).orElseThrow(() -> new RelationNotFoundException("instructor not found"));
+	
 	}
 
 	@DeleteMapping("/api/post/deleteById/{id}")
