@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bms.project.dao.UserRepo;
 import com.bms.project.models.User;
 import com.bms.project.services.PostServices;
 import com.bms.project.services.UserServices;
@@ -35,15 +34,6 @@ public class UserController {
 	public ResponseEntity<User> save(@Valid @RequestBody User user) {
 		User result = userServices.save(user);
 		return new ResponseEntity<User>(result, HttpStatus.OK);
-	}
-
-	@PutMapping("/api/user/update/{id}")
-	public ResponseEntity<Optional<User>> update(@PathVariable long id, @Valid @RequestBody User user) {
-		if (userServices.findById(id) != null) {
-			userServices.save(user);
-			return new ResponseEntity<Optional<User>>(HttpStatus.OK);
-		}
-		return new ResponseEntity("User not found!", HttpStatus.BAD_REQUEST);
 	}
 
 	@GetMapping("/api/user/findById/{id}")
@@ -70,4 +60,9 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
+	@PutMapping("/api/user/update/{userId}")
+	public ResponseEntity<Optional<User>> update(@PathVariable long userId, @Valid @RequestBody User user) {
+		Optional<User> result = userServices.update(userId, user);
+		return new ResponseEntity<Optional<User>>(result,HttpStatus.OK);
+	}
 }

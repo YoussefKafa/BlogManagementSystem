@@ -2,14 +2,20 @@ package com.bms.project.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.bms.project.dao.PostRepo;
 import com.bms.project.models.Post;
+import com.bms.project.models.User;
+import com.bms.project.payload.UpdatePostContentRequest;
+
 import java.util.Optional;
 
 @Service
 public class PostServices {
 	@Autowired
 	public PostRepo postRepo;
+	@Autowired
+	public UserServices userServices;
 
 	public Post saveOrUpdate(final Post post) {
 		return postRepo.save(post);
@@ -35,4 +41,17 @@ public class PostServices {
 		return postRepo.findAll();
 	}
 
+	public Optional<Post> update(long userId, Post post) {
+		User user = userServices.findById(userId).get();
+		post.setUser(user);
+		this.saveOrUpdate(post);
+		return Optional.ofNullable(post);
+	}
+
+	public Post updateContent(long postId, UpdatePostContentRequest updatePostContentRequest) {
+		Post post = postRepo.findById(postId).get();
+		post.setContent(updatePostContentRequest.getContent());
+		this.saveOrUpdate(post);
+		return post;
+	}
 }
