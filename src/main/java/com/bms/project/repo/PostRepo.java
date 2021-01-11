@@ -1,4 +1,4 @@
-package com.bms.project.dao;
+package com.bms.project.repo;
 
 import java.util.List;
 import java.util.Optional;

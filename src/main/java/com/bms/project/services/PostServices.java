@@ -3,10 +3,10 @@ package com.bms.project.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bms.project.dao.PostRepo;
 import com.bms.project.models.Post;
 import com.bms.project.models.User;
 import com.bms.project.payload.UpdatePostContentRequest;
+import com.bms.project.repo.PostRepo;
 
 import java.util.Optional;
 

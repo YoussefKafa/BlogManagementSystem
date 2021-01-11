@@ -16,9 +16,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Range;
-import org.springframework.format.annotation.NumberFormat;
-
 @Entity
 @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = { "email" }))
 public class User {

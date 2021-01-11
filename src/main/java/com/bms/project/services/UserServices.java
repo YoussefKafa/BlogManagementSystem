@@ -5,9 +5,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.bms.project.dao.UserRepo;
 import com.bms.project.models.User;
+import com.bms.project.repo.UserRepo;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -44,5 +45,15 @@ public class UserServices {
 	public Optional<User> update(@PathVariable long userId, @Valid @RequestBody User user) {
 		userRepo.save(user);
 		return Optional.ofNullable(user);
+	}
+
+	public List<User> findUsersByName(String name) {
+		List<User> users = userRepo.findUsersByName(name);
+		return users;
+	}
+
+	public User findUserByEmail(String email) {
+		User user = userRepo.findUserByEmail(email);
+		return user;
 	}
 }
