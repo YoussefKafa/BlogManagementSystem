@@ -79,4 +79,10 @@ public class UserController {
 		User result = userServices.findUserByEmail(userEmail);
 		return new ResponseEntity<User>(result, HttpStatus.OK);
 	}
+
+	@GetMapping("/api/user/existsById/{userId}")
+	public ResponseEntity<String> existsById(@PathVariable long userId) {
+		String result = userServices.existsById(userId);
+		return new ResponseEntity<String>(result, HttpStatus.OK);
+	}
 }

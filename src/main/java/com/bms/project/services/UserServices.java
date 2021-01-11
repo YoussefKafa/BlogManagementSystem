@@ -56,4 +56,12 @@ public class UserServices {
 		User user = userRepo.findUserByEmail(email);
 		return user;
 	}
+
+	public String existsById(long userId) {
+		boolean flag = userRepo.existsById(userId);
+		if (flag) {
+			return "This user is exist";
+		}
+		return "This user is not exist";
+	}
 }
